@@ -14,6 +14,11 @@ const userService = {
 
         return newUser;
     },
+    list: async () => {
+        const users = await User.findAll();
+
+        return users;
+    },
 };
 
 module.exports = userService;

@@ -4,13 +4,13 @@ const { User } = require('../models');
 const { JWT_SECRET } = process.env;
 
 module.exports = async (req, res, next) => {
-    const { token } = req.headers.authorization;
+    const { authorization: token } = req.headers;
 
     if (!token) {       
         return res.status(401).json({ message: 'Token not found' });
     }
     
-    const { data: { email } } = jwt.verify(token, JWT_SECRET);
+    const { email } = jwt.verify(token, JWT_SECRET);
     const user = await User.findOne({ where: { email } });
     if (!user) {
         return res.status(401).json({ message: 'Expired or invalid token' });
