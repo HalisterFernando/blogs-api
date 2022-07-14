@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('User', {
         id: { 
@@ -12,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
         timestamps: false,        
+        tableName: 'Users'
     });
 
     return User;

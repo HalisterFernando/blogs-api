@@ -11,7 +11,7 @@ module.exports = {
     },
     title: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
     },
     content: {
         allowNull: false,
@@ -23,7 +23,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         references: {
-            model: 'User',
+            model: 'Users',
             key: 'id'
         }
     },
