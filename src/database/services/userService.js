@@ -19,6 +19,15 @@ const userService = {
 
         return users;
     },
+    getById: async (id) => {
+        const user = await User.findByPk(id);
+        if (!user) {
+            const err = new Error('User does not exist');
+            err.name = 'UserNotFound';
+            throw err;
+        }
+        return user;
+    },
 };
 
 module.exports = userService;
