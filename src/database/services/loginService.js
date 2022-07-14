@@ -5,12 +5,9 @@ const loginService = {
         const result = await User.findOne({ where: { email, password } });
 
         if (!result) {
-            return {
-                error: {
-                    status: 404,
-                    message: 'Invalid fields',
-                },
-            };
+            const err = new Error('Invalid fields');
+            err.name = 'InvalidFields';
+            throw err;           
         }
 
         return result;

@@ -5,12 +5,9 @@ const userService = {
         const isNewUser = await User.findOne({ where: { email } });
 
         if (isNewUser) {
-            return {
-                error: {
-                    status: 409,
-                    message: 'User already registered',
-                },
-            };
+         const err = new Error('User already registered');
+         err.name = 'AlreadyExists';
+         throw err;
         }
          
         const newUser = await User.create({ displayName, email, password, image });
