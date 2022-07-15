@@ -6,5 +6,6 @@ const router = express.Router();
 
 router.use(validate.token);
 router.post('/', validate.newCategory, categoryController.create);
+router.get('/', categoryController.list);
 
 module.exports = router;
