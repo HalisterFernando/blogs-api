@@ -1,15 +1,31 @@
+const errors = {
+    UserNotFound: {
+        status: 404,        
+    },
+    InvalidFields: {
+        status: 400,
+    },
+    AlreadyExists: {
+        status: 409,
+    },
+    MissingFields: {
+        status: 400,
+    },
+    TokenNotFound: {
+        status: 401,
+    },
+    InvalidNewUser: {
+        status: 400,
+    },
+    InvalidNewCategory: {
+        status: 400,
+    },
+};
+
 module.exports = (err, _req, res, _next) => {
     const { name, message } = err;
-    switch (name) {
-        case 'token':
-            return res.status(401).json({ message });
-        case 'UserNotFound': 
-            return res.status(404).json({ message });
-        case 'InvalidFields':
-            return res.status(400).json({ message });
-        case 'AlreadyExists':
-            return res.status(409).json({ message });      
-        default:
-            return res.status(500).json({ message });
+    if (name === 'JsonWebTokenError') {
+        return res.status(401).json({ message: 'Expired or invalid token' });
     }
+  return res.status(errors[name].status).json({ message });
 };

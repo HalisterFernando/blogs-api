@@ -11,16 +11,15 @@ const userService = {
         }
          
         const newUser = await User.create({ displayName, email, password, image });
-
         return newUser;
     },
     list: async () => {
-        const users = await User.findAll({ attributes: ['email', 'image', 'displayName'] });
-
+        const users = await User.findAll({ attributes: { exclude: ['password'] } });
         return users;
     },
     getById: async (id) => {
         const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
+
         if (!user) {
             const err = new Error('User does not exist');
             err.name = 'UserNotFound';
