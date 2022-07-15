@@ -49,7 +49,7 @@ module.exports = {
         const { name } = req.body;
        
         const { error } = Joi.object({
-            name: Joi.string().min(1),
+            name: Joi.string().required(),
         }).validate({ name });
     
         if (error) {
