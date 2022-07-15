@@ -1,6 +1,6 @@
 const express = require('express');
 require('express-async-errors');
-const handleErrors = require('./database/middlewares/handleErrors');
+const handleErrors = require('./middlewares/handleErrors');
 const loginRouter = require('./routes/loginRouter');
 const userRouter = require('./routes/userRouter');
 const categoryRouter = require('./routes/categoryRouter');

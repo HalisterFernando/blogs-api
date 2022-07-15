@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User } = require('../database/models');
 
 const userService = {
     create: async ({ displayName, email, password, image }) => {
@@ -15,12 +15,12 @@ const userService = {
         return newUser;
     },
     list: async () => {
-        const users = await User.findAll();
+        const users = await User.findAll({ attributes: ['email', 'image', 'displayName'] });
 
         return users;
     },
     getById: async (id) => {
-        const user = await User.findByPk(id);
+        const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
         if (!user) {
             const err = new Error('User does not exist');
             err.name = 'UserNotFound';

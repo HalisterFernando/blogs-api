@@ -1,6 +1,8 @@
 module.exports = (err, _req, res, _next) => {
     const { name, message } = err;
     switch (name) {
+        case 'token':
+            return res.status(401).json({ message });
         case 'UserNotFound': 
             return res.status(404).json({ message });
         case 'InvalidFields':

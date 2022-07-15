@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User } = require('../database/models');
 
 const loginService = {
     login: async (email, password) => {
