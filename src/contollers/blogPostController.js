@@ -5,7 +5,7 @@ const blogPostController = {
         const { authorization: token } = req.headers;
         const newPost = await blogPostService.create({ ...req.body, token });
         const { dataValues: 
-            { id, title, content, userId, updatedAt: updated, createdAt: published } } = newPost;
+            { id, title, content, userId, updated, published } } = newPost;
         return res.status(201)
         .json({ id, title, content, userId, updated, published });
     },

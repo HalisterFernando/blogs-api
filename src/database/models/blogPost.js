@@ -1,5 +1,7 @@
 'use strict';
 
+const { TIMESTAMP } = require("mysql2/lib/constants/types");
+
 module.exports = (sequelize, DataTypes) => {
     const BlogPost = sequelize.define('BlogPost', {
         id: { 
@@ -13,17 +15,16 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER, 
             foreignKey: true 
         },
-        createdAt: {
-          type: sequelize.literal('CURRENT_TIMESTAMP'),
-          field: 'published'
-        },        
-        updatedAt: {
-          type: sequelize.literal('CURRENT_TIMESTAMP'),
-          field: 'updated'
-        },           
-               
+        published: {
+            type: "TIMESTAMP",   
+        },                    
+        updated: {
+            type: "TIMESTAMP",    
+        },   
+  
     },
-    {           
+    {   createdAt: 'published',
+        updatedAt: 'updated',
         tableName: 'BlogPosts'
     });
     BlogPost.associate = (models) => {

@@ -1,5 +1,7 @@
 'use strict';
 
+const { sequelize } = require("../models");
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
    await queryInterface.createTable('BlogPosts', {
@@ -28,14 +30,14 @@ module.exports = {
         }
     },
     published: {
-        allowNull: false,
-        type: Sequelize.DATE
+        type: 'TIMESTAMP',       
+        allowNull: false        
     },
-    updated : {
-        allowNull: false,
-        type: Sequelize.DATE
+    updated: {
+        type: 'TIMESTAMP',       
+        allowNull: false,        
     }
-   })
+   },)
   },
 
   down: async (queryInterface, Sequelize) => {
