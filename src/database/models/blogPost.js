@@ -13,11 +13,17 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER, 
             foreignKey: true 
         },
-        published: sequelize.literal('CURRENT_TIMESTAMP'),        
-        updated: sequelize.literal('CURRENT_TIMESTAMP'),           
+        createdAt: {
+          type: sequelize.literal('CURRENT_TIMESTAMP'),
+          field: 'published'
+        },        
+        updatedAt: {
+          type: sequelize.literal('CURRENT_TIMESTAMP'),
+          field: 'updated'
+        },           
                
     },
-    {                
+    {           
         tableName: 'BlogPosts'
     });
     BlogPost.associate = (models) => {

@@ -20,6 +20,9 @@ const errors = {
     InvalidNewCategory: {
         status: 400,
     },
+    IdsNotFound: {
+        status: 400,
+    },
 };
 
 module.exports = (err, _req, res, _next) => {

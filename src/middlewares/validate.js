@@ -1,6 +1,7 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
+const { Category } = require('../database/models');
 
 const { JWT_SECRET } = process.env;
 
@@ -59,6 +60,31 @@ module.exports = {
         }
     
         return next();
+    },
+    newPost: async (req, res, next) => {
+        const { title, content, categoryIds } = req.body;
+
+        const { error } = Joi.object({
+            title: Joi.string().required(),
+            content: Joi.string().required(),
+            categoryIds: Joi.array().min(1),
+        }).validate({ title, content, categoryIds });
+
+        if (error) {
+            const err = new Error('Some required fields are missing');
+            err.name = 'MissingFields';
+            throw err;
+        }
+
+        const existingIds = await Promise.all(categoryIds.map((id) => Category.findByPk(id)));
+
+        if (existingIds.every((el) => !el)) {
+            const err = new Error('"categoryIds" not found');
+            err.name = 'IdsNotFound';
+            throw err;
+        }
+        
+       return next();
     },
 
 };
